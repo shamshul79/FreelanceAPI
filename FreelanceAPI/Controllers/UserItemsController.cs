@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FreelanceAPI.Models;
 
-namespace FreelanceAPI
+namespace FreelanceAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -24,10 +24,10 @@ namespace FreelanceAPI
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserItem>>> GetUserItems()
         {
-          if (_context.UserItems == null)
-          {
-              return NotFound();
-          }
+            if (_context.UserItems == null)
+            {
+                return NotFound();
+            }
             return await _context.UserItems.ToListAsync();
         }
 
@@ -35,10 +35,10 @@ namespace FreelanceAPI
         [HttpGet("{id}")]
         public async Task<ActionResult<UserItem>> GetUserItem(long id)
         {
-          if (_context.UserItems == null)
-          {
-              return NotFound();
-          }
+            if (_context.UserItems == null)
+            {
+                return NotFound();
+            }
             var userItem = await _context.UserItems.FindAsync(id);
 
             if (userItem == null)
@@ -85,10 +85,10 @@ namespace FreelanceAPI
         [HttpPost]
         public async Task<ActionResult<UserItem>> PostUserItem(UserItem userItem)
         {
-          if (_context.UserItems == null)
-          {
-              return Problem("Entity set 'UserContext.UserItems'  is null.");
-          }
+            if (_context.UserItems == null)
+            {
+                return Problem("Entity set 'UserContext.UserItems'  is null.");
+            }
             _context.UserItems.Add(userItem);
             await _context.SaveChangesAsync();
 
